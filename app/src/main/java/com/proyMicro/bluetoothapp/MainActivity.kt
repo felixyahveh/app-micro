@@ -5,6 +5,9 @@ import android.widget.TextView
 import android.widget.Button
 import Bluetooth
 import android.bluetooth.BluetoothAdapter
+import android.util.Log
+import org.json.JSONException
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +31,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun displayJsonData(jsonData: String) {
-        findViewById<TextView>(R.id.tv_json_data).text = jsonData
+        try {
+            val jsonObject = JSONObject(jsonData)
+            val keys = jsonObject.keys()
+            val stringBuilder = StringBuilder()
+
+            while (keys.hasNext()) {
+                val key = keys.next()
+                val value = jsonObject.getInt(key)
+
+                stringBuilder.append("$key: $value\n")
+            }
+            findViewById<TextView>(R.id.tv_json_data).text = stringBuilder.toString()
+            //textView.text = stringBuilder.toString()
+        } catch (e: JSONException) {
+            Log.e("MainActivity", "Error parsing JSON", e)
+        }
     }
 
 }

@@ -1,8 +1,11 @@
 import java.util.UUID
 import android.bluetooth.BluetoothSocket
 import android.bluetooth.BluetoothDevice
+import android.content.ContentValues.TAG
 import android.util.Log
 import com.proyMicro.bluetoothapp.MainActivity
+import org.json.JSONArray
+import org.json.JSONException
 
 class Bluetooth(private val activity: MainActivity) {
 
@@ -24,7 +27,23 @@ class Bluetooth(private val activity: MainActivity) {
                         val jsonData = String(buffer, 0, bytes)
                         activity.runOnUiThread {
                             activity.displayJsonData(jsonData)
-                        }
+                        }/*
+                        activity.runOnUiThread {
+                            try {
+                                val jsonArray = JSONArray(jsonData)
+                                val stringBuilder = StringBuilder()
+
+                                for (i in 0 until jsonArray.length()) {
+                                    val jsonObject = jsonArray.getJSONObject(i)
+                                    stringBuilder.append("Tipo de moneda: ${jsonObject.getString("moneda")} - ")
+                                    stringBuilder.append("Cantidad: ${jsonObject.getInt("cantidad")}\n")
+                                }
+
+                                activity.displayJsonData(stringBuilder.toString())
+                            } catch (e: JSONException) {
+                                Log.e(TAG, "Error al procesar el mensaje recibido: $e")
+                            }
+                        }*/
                     }
                 }
 
