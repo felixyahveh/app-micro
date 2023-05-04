@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothDevice
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.proyMicro.bluetoothapp.MainActivity
+import kotlin.coroutines.*
 import org.json.JSONArray
 import org.json.JSONException
 
@@ -19,7 +20,7 @@ class Bluetooth(private val activity: MainActivity) {
                 socket?.connect()
 
                 val inputStream = socket?.inputStream
-                val buffer = ByteArray(1024)
+                val buffer = ByteArray(8192)
 
                 while (true) {
                     val bytes = inputStream?.read(buffer) ?: 0
@@ -27,7 +28,8 @@ class Bluetooth(private val activity: MainActivity) {
                         val jsonData = String(buffer, 0, bytes)
                         activity.runOnUiThread {
                             activity.displayJsonData(jsonData)
-                        }/*
+                        }
+                    /*
                         activity.runOnUiThread {
                             try {
                                 val jsonArray = JSONArray(jsonData)
@@ -45,6 +47,7 @@ class Bluetooth(private val activity: MainActivity) {
                             }
                         }*/
                     }
+                    Thread.sleep(3000L)
                 }
 
             } catch (e: Exception) {

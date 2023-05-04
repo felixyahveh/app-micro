@@ -9,6 +9,7 @@ import android.util.Log
 import org.json.JSONException
 import org.json.JSONObject
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bluetooth: Bluetooth
@@ -31,10 +32,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun displayJsonData(jsonData: String) {
+        //findViewById<TextView>(R.id.tv_json_data).text = jsonData
         try {
             val jsonObject = JSONObject(jsonData)
+            findViewById<TextView>(R.id.tv_json_data).text = jsonObject.toString()
+            findViewById<TextView>(R.id.mod1).text = jsonObject.getString("1")
+            findViewById<TextView>(R.id.mod2).text = jsonObject.getString("2")
+            findViewById<TextView>(R.id.mod5).text = jsonObject.getString("5")
+            findViewById<TextView>(R.id.mod10).text = jsonObject.getString("10")
+            findViewById<TextView>(R.id.total1).text = jsonObject.getString("1")
+            findViewById<TextView>(R.id.total2).text = (jsonObject.getString("2").toInt() * 2).toString()
+            findViewById<TextView>(R.id.total5).text = (jsonObject.getString("5").toInt() * 5).toString()
+            findViewById<TextView>(R.id.total10).text = (jsonObject.getString("10").toInt() * 10).toString()
             val keys = jsonObject.keys()
-            val stringBuilder = StringBuilder()
+            /*val stringBuilder = StringBuilder()
 
             while (keys.hasNext()) {
                 val key = keys.next()
@@ -42,7 +53,9 @@ class MainActivity : AppCompatActivity() {
 
                 stringBuilder.append("$key: $value\n")
             }
-            findViewById<TextView>(R.id.tv_json_data).text = stringBuilder.toString()
+
+            findViewById<TextView>(R.id.tv_json_data).text = jsonObject.toString()
+            Log.d("JSON: ",stringBuilder.toString())*/
             //textView.text = stringBuilder.toString()
         } catch (e: JSONException) {
             Log.e("MainActivity", "Error parsing JSON", e)
