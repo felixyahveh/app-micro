@@ -1,12 +1,8 @@
 import java.util.UUID
 import android.bluetooth.BluetoothSocket
 import android.bluetooth.BluetoothDevice
-import android.content.ContentValues.TAG
 import android.util.Log
-import com.proyMicro.bluetoothapp.MainActivity
-import kotlin.coroutines.*
-import org.json.JSONArray
-import org.json.JSONException
+import com.proyMicro.bluetoothApp.MainActivity
 
 class Bluetooth(private val activity: MainActivity) {
 

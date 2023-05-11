@@ -1,4 +1,4 @@
-package com.proyMicro.bluetoothapp
+package com.proyMicro.bluetoothApp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -6,6 +6,7 @@ import android.widget.Button
 import Bluetooth
 import android.bluetooth.BluetoothAdapter
 import android.util.Log
+import com.proyMicro.bluetoothapp.R
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         //findViewById<TextView>(R.id.tv_json_data).text = jsonData
         try {
             val jsonObject = JSONObject(jsonData)
-            findViewById<TextView>(R.id.tv_json_data).text = jsonObject.toString()
+            //findViewById<TextView>(R.id.tv_json_data).text = jsonObject.toString()
             findViewById<TextView>(R.id.mod1).text = jsonObject.getString("1")
             findViewById<TextView>(R.id.mod2).text = jsonObject.getString("2")
             findViewById<TextView>(R.id.mod5).text = jsonObject.getString("5")
@@ -44,6 +45,11 @@ class MainActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.total2).text = (jsonObject.getString("2").toInt() * 2).toString()
             findViewById<TextView>(R.id.total5).text = (jsonObject.getString("5").toInt() * 5).toString()
             findViewById<TextView>(R.id.total10).text = (jsonObject.getString("10").toInt() * 10).toString()
+
+            var total = jsonObject.getString("1").toInt() + (jsonObject.getString("2").toInt() * 2) + (jsonObject.getString("5").toInt() * 5) + (jsonObject.getString("10").toInt() * 10)
+
+            findViewById<TextView>(R.id.canTotal).text = "Total: $total"
+
             val keys = jsonObject.keys()
             /*val stringBuilder = StringBuilder()
 

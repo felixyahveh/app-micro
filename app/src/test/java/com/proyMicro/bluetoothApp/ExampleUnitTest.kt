@@ -1,4 +1,4 @@
-package com.proyMicro.bluetoothapp
+package com.proyMicro.bluetoothApp
 
 import org.junit.Test
 
